@@ -21,7 +21,7 @@ public class UserRegistration {
     }
 
     public void validateEmail(String email) {
-        boolean result = Pattern.compile("^[a-z]+([_.-]?[a-zA-Z0-9])*[@][a-zA-Z0-9]+([.][a-z]{2,3}){1,2}$").matcher(email).matches();
+        boolean result = Pattern.compile("^[a-z]+([+_.-]?[a-zA-Z0-9])*[@][a-zA-Z0-9]+([.][a-z]{2,3}){1,2}$").matcher(email).matches();
         if (result == true)
             System.out.println("Valid Email");
         else
@@ -37,7 +37,7 @@ public class UserRegistration {
     }
 
     public void validatePassword(String password) {
-        boolean result = Pattern.compile("^(?=.*[A-Z])(?=.*[0-9])(?=.*[~!@#$%&*-+])[A-Za-z0-9~!@#$%&*-+]{8,}").matcher(password).matches();
+        boolean result = Pattern.compile("^(?=.*[A-Z])(?=.*[0-9])(?=.*[~!@#$%&*+])([~!@#$%&*+]?[A-Za-z0-9]){7,}$").matcher(password).matches();
         if (result == true)
             System.out.println("Valid Password");
         else
