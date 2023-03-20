@@ -37,7 +37,7 @@ public class Parameterized_Email_Test {
                 {"abc@gmail.com.1a", false}, {"abc@gmail.com.aa.au", false}});
     }
     @Test
-    public void givenEmail_WhenValidOrInvalid_ShouldReturnTrueAndFalseRespectively() {
+    public void givenEmail_WhenValidOrInvalid_ShouldReturnTrueAndFalseRespectively() throws UserRegistrationException {
         Assert.assertEquals(expectedResult, userRegistrationValidation.validateEmail(email));
     }
 }
