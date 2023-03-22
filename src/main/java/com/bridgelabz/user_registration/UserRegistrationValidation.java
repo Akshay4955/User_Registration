@@ -8,12 +8,14 @@ public class UserRegistrationValidation {
     private static final String PASSWORD_PATTERN = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[~!@#$%&*+])([~!@#$%&*+]?[A-Za-z0-9]){7,}$";
     private static final String EMAIL_PATTERN = "^[a-z]+([+_.-]?[a-zA-Z0-9])*[@][a-zA-Z0-9]+([.][a-z]{2,3}){1,2}$";
 
+    IUserValidation validation = (String input, String pattern) -> Pattern.compile(pattern).matcher(input).matches();
+
     public boolean validateFirstName(String firstName) throws UserRegistrationException {
         try {
             if (firstName.isEmpty()) {
                 throw new UserRegistrationException("Please enter name", UserRegistrationException.ExceptionType.ENTERED_EMPTY);
             }
-            boolean result = Pattern.compile(NAME_PATTERN).matcher(firstName).matches();
+            boolean result = validation.validate(firstName, NAME_PATTERN);
             if (result == true)
                 return true;
             else
@@ -28,7 +30,7 @@ public class UserRegistrationValidation {
             if (lastName.isEmpty()) {
                 throw new UserRegistrationException("Please enter last name", UserRegistrationException.ExceptionType.ENTERED_EMPTY);
             }
-            boolean result = Pattern.compile(NAME_PATTERN).matcher(lastName).matches();
+            boolean result = validation.validate(lastName, NAME_PATTERN);
             if (result == true)
                 return true;
             else
@@ -43,13 +45,13 @@ public class UserRegistrationValidation {
             if (mobileNo.isEmpty()) {
                 throw new UserRegistrationException("Please enter mobile number", UserRegistrationException.ExceptionType.ENTERED_EMPTY);
             }
-            boolean result = Pattern.compile(MOBILE_NO_PATTERN).matcher(mobileNo).matches();
+            boolean result = validation.validate(mobileNo, MOBILE_NO_PATTERN);
             if (result == true)
                 return true;
             else
                 return false;
         } catch (NullPointerException e) {
-            throw new UserRegistrationException("Please enter valid mobile noumber", UserRegistrationException.ExceptionType.ENTERED_NULL);
+            throw new UserRegistrationException("Please enter valid mobile number", UserRegistrationException.ExceptionType.ENTERED_NULL);
         }
     }
 
@@ -58,7 +60,7 @@ public class UserRegistrationValidation {
             if (password.isEmpty()) {
                 throw new UserRegistrationException("PLease enter password", UserRegistrationException.ExceptionType.ENTERED_EMPTY);
             }
-            boolean result = Pattern.compile(PASSWORD_PATTERN).matcher(password).matches();
+            boolean result = validation.validate(password, PASSWORD_PATTERN);
             if (result == true)
                 return true;
             else
@@ -73,7 +75,7 @@ public class UserRegistrationValidation {
             if (email.isEmpty()) {
                 throw new UserRegistrationException("Please enter email", UserRegistrationException.ExceptionType.ENTERED_EMPTY);
             }
-            boolean result = Pattern.compile(EMAIL_PATTERN).matcher(email).matches();
+            boolean result = validation.validate(email, EMAIL_PATTERN);
             if (result == true)
                 return true;
             else
